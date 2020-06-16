@@ -52,7 +52,7 @@ public class BaseballRepository {
 	}
 	
 	public List<Players> findTeamPlayer() {
-		final String SQL = "SELECT id, playerName FROM players";
+		final String SQL = "SELECT ?, playerName FROM players";
 		List<Players> playerList = new ArrayList<>();
 		
 		try {

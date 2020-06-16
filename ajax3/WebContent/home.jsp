@@ -38,8 +38,8 @@
 				<tbody id="kboTeam__list">
 					<c:forEach var="kboTeam" items="${kboTeams}">
 						<tr id="kboTeam-${kboTeam.id}" onclick="playerList();">
-							<td style="text-align: center;">${kboTeam.id}</td>
-							<td style="text-align: center;">${kboTeam.teamName}</td>
+							<td style="text-align: center; cursor: pointer;">${kboTeam.id}</td>
+							<td style="text-align: center; cursor: pointer;">${kboTeam.teamName}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -94,6 +94,7 @@
 
 	</div>
 
+<script src="/ajax3/js/home.js"></script>
 
 </body>
 </html>

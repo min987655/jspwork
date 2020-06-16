@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cos.ajax3.action.Action;
+import com.cos.ajax3.action.BaseballHomeAction;
+import com.cos.ajax3.action.PlayerListProcAction;
+
 @WebServlet("/baseball")
 public class BaseballController extends HttpServlet {
 	private static final String TAG = "BaseballController : ";
@@ -27,15 +31,17 @@ public class BaseballController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
 		System.out.println(TAG + "doProcess : " + cmd);
-/*		Action action = router(cmd); 
-		action.execute(request, response);*/
+		Action action = router(cmd); 
+		action.execute(request, response);
 	}
 	
-/*	public Action router(String cmd) {
+	public Action router(String cmd) {
 		if (cmd.equals("home")) {
-			return new ProductHomeAction();
-		} 
+			return new BaseballHomeAction();
+		} else if (cmd.equals("playerListProc")) {
+			return new PlayerListProcAction();
+		}
 		return null;
-	} */
+	} 
 
 }

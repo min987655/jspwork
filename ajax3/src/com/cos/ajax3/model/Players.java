@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Player {
-	private int playerId;
-	private String position; 
+public class Players {
+	private int id;
+	private int teamId;
+	private String playerName;
+	private String position;
 }

@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cos.ajax3.db.DBconn;
+import com.cos.ajax3.model.KBOTeam;
+import com.cos.ajax3.model.Players;
+
 public class BaseballRepository {
 	private static final String TAG = "BaseballRepository : "; 
 	
@@ -19,9 +23,9 @@ public class BaseballRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	/*public List<Product> findAll() {
-		final String SQL = "SELECT id, name, type, price, count FROM product ORDER BY id ASC";
-		List<Product> products = new ArrayList<>();
+	public List<KBOTeam> findAll() {
+		final String SQL = "SELECT id, teamName FROM KBOTeam";
+		List<KBOTeam> kboTeams = new ArrayList<>();
 		
 		try {
 			conn = DBconn.getConnection();
@@ -30,18 +34,14 @@ public class BaseballRepository {
 			
 			while (rs.next()) {
 				
-				Product product = new Product(
+				KBOTeam kboTeam = new KBOTeam(
 								rs.getInt("id"),
-								rs.getString("name"),
-								rs.getString("type"),
-								rs.getInt("price"),
-								rs.getInt("count")
-						
+								rs.getString("teamName")
 				);
-				products.add(product);
-				System.out.println(TAG + "product : " + product);
+				kboTeams.add(kboTeam);
+				System.out.println(TAG + "KBOTeam : " + kboTeam);
 			}
-			return products;
+			return kboTeams;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findAll : " + e.getMessage());
@@ -49,5 +49,35 @@ public class BaseballRepository {
 			DBconn.close(conn, pstmt, rs);
 		}
 		return null;
-	}*/
+	}
+	
+	public List<Players> findTeamPlayer() {
+		final String SQL = "SELECT id, playerName FROM players";
+		List<Players> playerList = new ArrayList<>();
+		
+		try {
+			conn = DBconn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				Players player = new Players(
+								rs.getInt("id"),
+								rs.getInt("teamId"),
+								rs.getString("playerName"),
+								rs.getString("position")
+				);
+				playerList.add(player);
+				System.out.println(TAG + "KBOTeam : " + player);
+			}
+			return playerList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findTeamPlayer : " + e.getMessage());
+		} finally {
+			DBconn.close(conn, pstmt, rs);
+		}
+		return null;
+	}
 }
